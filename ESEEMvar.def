@@ -1,0 +1,50 @@
+
+;     PulseSPEL general variables, definitions & convention
+
+
+
+begin defs
+;                                               
+;
+;                                                         Feb. 2000, PEH
+; Variables     ; Comments:
+                        ;
+p0   = 16      ; 90 pulse length
+p1   = 32      ;180 pulse length 
+p2   = 32      ;
+p3   = 40      ;
+p7   = 80      ; LeCroy trigger
+p9   = 1000
+pg   = 24      ; Intergrator Gate Width
+                        ;
+d0   = 0       ; data trigger offset time
+d1   = 148     ; Initial delay between the first two pulses
+d2   = 288     ; Initial delay between the second and third pulses
+d3   = 300     ; Initial delay between the third and fourth pulses
+d4   = 2000    ;
+d5   = 400     ;
+                        ;
+dx   = 0       ; t2 time scale starting value
+dy   = 0       ; t1 time scale starting value
+               ;
+d30  = 16      ; t2 time scale increment
+d31  = 0       ; t1 time scale increment
+d20  = 0       ; Initial value of dx
+d21  = 0       ; Initial value of dy
+                        ;
+h    = 100     ; number of shots/loop                     ( counter: I )
+n    = 1       ; number of sweeps to accumulate           ( counter: K )
+s    = 300     ; Sweep length (n. of data really taken)   ( counter: X )
+t    = 1       ; second time axsis sweep length           ( counter: Y )
+m    = 10      ;
+a    = 1024    ;
+              ;
+srt  = 500 * srtu ; shot repetition time, srtu=1usec
+r    = 1       ;
+c    = 1       ;
+b    = 1       ;
+             ;
+w    = 800     ; Split point of sweeps (ns) ,i.e. pulse separatrion where
+             ; TWT gate pulse can be split.
+;
+end defs

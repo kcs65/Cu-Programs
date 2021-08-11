@@ -1,0 +1,104 @@
+;This is the three-pulse ESEEM experiment
+;Marco and Jim December 2004
+;
+begin defs
+dim s[1024]
+dim1 s[1024,1]
+dim2 s[512,4]
+end defs
+;
+begin lists "3pESEEM setup"
+ph1 +x -x +x -x
+ph2 +x +x -x -x
+asg1 +a -a -a +a
+bsg1 +b -b -b +b
+end lists
+;
+begin lists1 "3pESEEM"
+ph1 +x -x +x -x
+ph2 +x +x -x -x
+asg1 +a -a -a +a
+bsg1 +b -b -b +b
+end lists1
+;
+begin exp "3pESEEM setup" [quad trans]
+;
+;Setup Experiment for the three pulse ESEEM experiment.
+;You will find the correct acquisition time, d0.
+;
+for k=1 to n
+    totscans(n)
+shot i=1 to a
+     p0 [ph1]
+     d1
+     p0 [ph2]
+     d2
+     p0 [+x]
+     d0
+     dig [sg1]
+   next i
+   scansdone(k)
+   next k
+end exp
+;
+begin exp1 "3pESEEM" [quad intg]
+;3p ESEEM experiment to observe nuclear modulations.
+;The step size in dx will step out the position between the
+;second and third pulses.  
+;In order to check for blind spots, the step size, dy, will
+;step out the position between the first and second pulses.
+;Blind spots occur frequently in ESEEM experiments, so be sure to 
+;use a number of points in sy of at least five.
+;
+for k=1 to n
+    totscans(n)
+for y=1 to sy
+   sweep x=1 to sx
+   shot i=1 to h
+;
+     p0 [ph1]
+     d1
+     dy
+     p0 [ph2]
+     d2
+     dx
+     p0 [+x]
+     d0
+     dy
+     acq [sg1]
+   next i
+  dx=dx+d30
+  next x
+  dx=0
+  dy=dy+d31
+  next y
+;
+scansdone(k)
+   next k
+;
+end exp1
+;
+begin exp2 "3pESEEM SPT" [SPT QUAD]
+;
+for y=1 to sy
+   sweep x=1 to sx
+   shot i=1 to h
+;
+     p0 [ph1]
+     d1
+     dy
+     p0 [ph2]
+     d2
+     dx
+     p0 [+x]
+     d0
+     dy
+     acq [sg1]
+   next i
+  dx=dx+d30
+  next x
+  dx=0
+  dy=dy+d31
+  next y
+;
+end exp2
